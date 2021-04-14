@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'vimeoplayer.dart';
+import 'package:vimeoplayer_trinity/vimeoplayer_trinity.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,7 +36,7 @@ class VideoScreen extends StatelessWidget {
                 preferredSize: Size(0.0, 0.0),
               ),
         body: ListView(children: <Widget>[
-          VimeoPlayer(id: '505942118', autoPlay: true, allowFullScreen: true),
+          VimeoPlayer(id: '395212534', autoPlay: true, allowFullScreen: true),
         ]));
   }
 }

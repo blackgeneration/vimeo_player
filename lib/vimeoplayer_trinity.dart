@@ -9,21 +9,19 @@ import 'dart:async';
 
 //Video player class
 class VimeoPlayer extends StatefulWidget {
-  final String id;
+  final String? id;
   final bool autoPlay;
   final bool looping;
-  final int position;
   final bool allowFullScreen;
   final bool allowPlaybackSpeedChanging;
 
   VimeoPlayer({
-    @required this.id,
-    this.autoPlay,
-    this.looping,
-    this.position,
-    @required this.allowFullScreen,
+    required this.id,
+    this.autoPlay = false,
+    this.looping = false,
+    required this.allowFullScreen,
     this.allowPlaybackSpeedChanging = false,
-    Key key,
+    Key? key,
   })  : assert(id != null && allowFullScreen != null),
         super(key: key);
 
@@ -32,48 +30,46 @@ class VimeoPlayer extends StatefulWidget {
         id,
         autoPlay,
         looping,
-        position,
         allowFullScreen,
         allowPlaybackSpeedChanging,
       );
 }
 
 class _VimeoPlayerState extends State<VimeoPlayer> {
-  String _id;
+  String? _id;
   bool autoPlay = false;
   bool looping = false;
   bool _overlay = true;
   bool fullScreen = false;
   bool allowFullScreen = false;
   bool allowPlaybackSpeedChanging = false;
-  int position;
+  int? position;
 
   _VimeoPlayerState(
     this._id,
     this.autoPlay,
     this.looping,
-    this.position,
     this.allowFullScreen,
     this.allowPlaybackSpeedChanging,
   );
 
   //Custom controller
-  VideoPlayerController _controller;
-  ChewieController _chewieController;
+  late VideoPlayerController _controller;
+  ChewieController? _chewieController;
 
-  Future<void> initFuture;
+  Future<void>? initFuture;
 
   //Quality Class
-  QualityLinks _quality;
+  late QualityLinks _quality;
   var _qualityValue;
 
   //Variable rewind
   bool _seek = false;
 
   //Video variables
-  double videoHeight;
-  double videoWidth;
-  double videoMargin;
+  late double videoHeight;
+  late double videoWidth;
+  late double videoMargin;
 
   //Variables for double-tap zones
   double doubleTapRMargin = 36;
@@ -161,7 +157,7 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
 
                   //We start from the same place where we left off when changing quality
                   if (_seek && _controller.value.duration.inSeconds > 2) {
-                    _controller.seekTo(Duration(seconds: position));
+                    _controller.seekTo(Duration(seconds: position!));
                     _seek = false;
                   }
 
@@ -169,7 +165,7 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                   if (_chewieController != null) {
                     return Container(
                       margin: EdgeInsets.only(left: videoMargin),
-                      child: Chewie(controller: _chewieController),
+                      child: Chewie(controller: _chewieController!),
                     );
                   }
                   return Container();
